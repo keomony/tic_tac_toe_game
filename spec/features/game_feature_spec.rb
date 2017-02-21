@@ -29,7 +29,7 @@ describe "game features" do
     end
   end
 
-  xit "second user makes a move" do
+  it "second user makes a move" do
     PTY.spawn('ruby game.rb') do |output, input|
       4.times do
         output.readline
