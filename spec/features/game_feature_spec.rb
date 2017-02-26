@@ -18,11 +18,9 @@ describe "game features" do
 
   it "first user makes a move" do
     PTY.spawn('ruby game.rb') do |output, input|
-      4.times do
-        output.readline
-      end
-      input.puts "2"
-      output.readline
+      users_inputs = [2]
+      play_with_inputs(output, input, users_inputs)
+
       expect(output.readline.chomp).to eq("|1|X|3|")
       expect(output.readline.chomp).to eq("|4|5|6|")
       expect(output.readline.chomp).to eq("|7|8|9|")
@@ -31,15 +29,9 @@ describe "game features" do
 
   it "second user makes a move" do
     PTY.spawn('ruby game.rb') do |output, input|
-      4.times do
-        output.readline
-      end
-      input.puts "2"
-      4.times do
-        output.readline
-      end
-      input.puts "6"
-      output.readline
+      users_inputs = [2,6]
+      play_with_inputs(output, input, users_inputs)
+
       expect(output.readline.chomp).to eq("|1|X|3|")
       expect(output.readline.chomp).to eq("|4|5|O|")
       expect(output.readline.chomp).to eq("|7|8|9|")
@@ -48,12 +40,8 @@ describe "game features" do
 
   it "second move for first user" do
     PTY.spawn('ruby game.rb') do |output, input|
-      4.times {output.readline}
-      input.puts "2"; output.readline
-      3.times {output.readline}
-      input.puts "6"; output.readline
-      3.times {output.readline}
-      input.puts "8"; output.readline
+      users_inputs = [2,6,8]
+      play_with_inputs(output, input, users_inputs)
 
       expect(output.readline.chomp).to eq("|1|X|3|")
       expect(output.readline.chomp).to eq("|4|5|O|")
@@ -63,14 +51,8 @@ describe "game features" do
 
   it "second move from second user" do
     PTY.spawn('ruby game.rb') do |output, input|
-      4.times {output.readline}
-      input.puts "2"; output.readline
-      3.times {output.readline}
-      input.puts "6"; output.readline
-      3.times {output.readline}
-      input.puts "8"; output.readline
-      3.times {output.readline}
-      input.puts "5"; output.readline
+      users_inputs = [2,6,8,5]
+      play_with_inputs(output, input, users_inputs)
 
       expect(output.readline.chomp).to eq("|1|X|3|")
       expect(output.readline.chomp).to eq("|4|O|O|")
