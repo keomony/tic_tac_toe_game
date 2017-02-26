@@ -60,6 +60,24 @@ describe "game features" do
       expect(output.readline.chomp).to eq("|7|X|9|")
     end
   end
+
+  it "second move from second user" do
+    PTY.spawn('ruby game.rb') do |output, input|
+      4.times {output.readline}
+      input.puts "2"; output.readline
+      3.times {output.readline}
+      input.puts "6"; output.readline
+      3.times {output.readline}
+      input.puts "8"; output.readline
+      3.times {output.readline}
+      input.puts "5"; output.readline
+
+      expect(output.readline.chomp).to eq("|1|X|3|")
+      expect(output.readline.chomp).to eq("|4|O|O|")
+      expect(output.readline.chomp).to eq("|7|X|9|")
+    end
+  end
+
   xit "user can not mark used square" do
 
   end

@@ -28,3 +28,5 @@ o_moves << gets.to_i
 show_the_grid(x_moves, o_moves)
 x_moves << gets.to_i
 show_the_grid(x_moves, o_moves)
+o_moves << gets.to_i
+show_the_grid(x_moves, o_moves)
